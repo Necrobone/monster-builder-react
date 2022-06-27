@@ -1,0 +1,7 @@
+{
+  "name": "monster-builder-react",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
