@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
+import MonstersContextProvider from "./store/MonstersContextProvider";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <MonstersContextProvider>
+          <App />
+      </MonstersContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
