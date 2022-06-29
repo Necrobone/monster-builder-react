@@ -13,7 +13,7 @@ import { MonsterTraits } from "../enum/monster/traits/MonsterTraits";
 export class Monster {
   constructor(
     public id: String,
-    public name: String,
+    public name?: String,
     public level?: Levels,
     public alignment?: Alignments,
     public size?: Sizes,
