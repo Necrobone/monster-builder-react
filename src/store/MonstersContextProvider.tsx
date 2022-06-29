@@ -1,6 +1,6 @@
 import { Storage } from "@capacitor/storage";
 import React, { useCallback, useEffect, useState } from "react";
-import { Monster } from "../models/monster.model";
+import { Monster } from "../models/Monster";
 import MonstersContext from "./MonstersContext";
 
 const MonstersContextProvider: React.FC = (props) => {

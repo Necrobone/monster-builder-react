@@ -1,5 +1,5 @@
 import React from "react";
-import { Monster } from "../models/monster.model";
+import { Monster } from "../models/Monster";
 
 const MonstersContext = React.createContext<{
   monsters: Monster[];

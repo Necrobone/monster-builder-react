@@ -1,5 +1,4 @@
 import {
-  IonButton,
   IonCard,
   IonCardHeader,
   IonCardTitle,
@@ -11,23 +10,25 @@ import {
   IonRow,
   IonTitle,
   IonToolbar,
+  isPlatform,
 } from "@ionic/react";
+import { add } from "ionicons/icons";
 import React, { useContext } from "react";
+import FixedBottomFab from "../components/FixedBottomFab";
+import ToolbarAction from "../components/ToolbarAction";
 import MonstersContext from "../store/MonstersContext";
 
-const MonsterBuilder: React.FC = () => {
+const Monsters: React.FC = () => {
   const context = useContext(MonstersContext);
-
-  const addMonsterHandler = async () => {
-    console.log('Add Monster');
-    context.addMonster(Math.random().toString());
-  }
 
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
           <IonTitle>Monster Builder</IonTitle>
+          {isPlatform("ios") && (
+            <ToolbarAction icon={add} link="/new-monster" />
+          )}
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -43,15 +44,13 @@ const MonsterBuilder: React.FC = () => {
               </IonCol>
             </IonRow>
           ))}
-          <IonRow>
-            <IonCol>
-              <IonButton onClick={addMonsterHandler}>Add Monster</IonButton>
-            </IonCol>
-          </IonRow>
         </IonGrid>
+        {!isPlatform("ios") && (
+          <FixedBottomFab icon={add} link="/new-monster" />
+        )}
       </IonContent>
     </IonPage>
   );
 };
 
-export default MonsterBuilder;
+export default Monsters;
