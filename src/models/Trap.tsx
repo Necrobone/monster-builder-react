@@ -1,3 +1,13 @@
+import { generateUniqueID } from "web-vitals/dist/lib/generateUniqueID";
+
+export interface Trap {
+  id: string;
+}
+
 export class Trap {
-  constructor(public id: string, public name?: string) {}
+  id: string;
+
+  constructor() {
+    this.id = generateUniqueID();
+  }
 }
