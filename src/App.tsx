@@ -29,24 +29,24 @@ import "@ionic/react/css/typography.css";
 import { construct, skull } from "ionicons/icons";
 import React, { useContext, useEffect } from "react";
 import { Redirect, Route } from "react-router-dom";
+import MonsterBuilder from "./pages/MonsterBuilder";
 
 import Monsters from "./pages/Monsters";
 import Traps from "./pages/Traps";
-import MonstersContext from "./store/MonstersContext";
-import MonstersContextProvider from "./store/MonstersContextProvider";
-import TrapsContextProvider from "./store/TrapsContextProvider";
+import MonsterBuilderContext from "./store/MonsterBuilderContext";
+import "./theme/theme.css";
 /* Theme variables */
 import "./theme/variables.css";
-import "./theme/theme.css";
 
 setupIonicReact();
 
 const App: React.FC = () => {
-  const context = useContext(MonstersContext);
+  const context = useContext(MonsterBuilderContext);
 
   const { initContext } = context;
 
   useEffect(() => {
+    console.log("Initializing context");
     initContext();
   }, [initContext]);
 
@@ -56,35 +56,25 @@ const App: React.FC = () => {
         <React.Suspense fallback={<IonSpinner />}>
           <IonTabs>
             <IonRouterOutlet>
-              <Route exact path="/monster-builder">
-                <MonstersContextProvider>
-                  <Monsters />
-                </MonstersContextProvider>
-              </Route>
-              <Route exact path="/trap-builder">
-                <TrapsContextProvider>
-                  <Traps />
-                </TrapsContextProvider>
-              </Route>
-              <Route exact path="/new-monster">
-                <Monsters />
-              </Route>
-              <Route exact path="/new-trap">
-                <Traps />
-              </Route>
-              <Redirect to="/monster-builder" />
+              <Route exact path="/monsters" component={Monsters} />
+              <Route exact path="/traps" component={Traps} />
             </IonRouterOutlet>
             <IonTabBar slot="bottom">
-              <IonTabButton href="/monster-builder" tab="monster">
+              <IonTabButton href="/monsters" tab="monster">
                 <IonIcon icon={skull} />
                 <IonLabel>Monsters</IonLabel>
               </IonTabButton>
-              <IonTabButton href="/trap-builder" tab="trap">
+              <IonTabButton href="/traps" tab="trap">
                 <IonIcon icon={construct} />
                 <IonLabel>Traps</IonLabel>
               </IonTabButton>
             </IonTabBar>
           </IonTabs>
+          <Route exact path="/monsters/:id" component={MonsterBuilder} />
+          <Route exact path="/traps/:id" component={MonsterBuilder} />
+          <Route exact path="/new-monster" component={MonsterBuilder} />
+          <Route exact path="/new-trap" component={Traps} />
+          <Redirect to="/monsters" />
         </React.Suspense>
       </IonReactRouter>
     </IonApp>
