@@ -5,14 +5,20 @@ import { Trap } from "../models/Trap";
 const MonsterBuilderContext = React.createContext<{
   monsters: Monster[];
   traps: Trap[];
-  addMonster: () => void;
-  addTrap: () => void;
+  createMonster: () => void;
+  loadMonster: (id: string) => void;
+  getMonster: () => Monster | undefined;
+  saveMonster: () => void;
+  clearMonster: () => void;
   initContext: () => void;
 }>({
   monsters: [],
   traps: [],
-  addMonster: () => {},
-  addTrap: () => {},
+  createMonster: () => {},
+  loadMonster: () => {},
+  getMonster: () => undefined,
+  saveMonster: () => {},
+  clearMonster: () => {},
   initContext: () => {},
 });
 

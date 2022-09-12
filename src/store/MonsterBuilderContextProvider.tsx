@@ -1,6 +1,5 @@
 import { Storage } from "@capacitor/storage";
 import React, { useCallback, useEffect, useState } from "react";
-import { generateUniqueID } from "web-vitals/dist/lib/generateUniqueID";
 import { Monster } from "../models/Monster";
 import { Trap } from "../models/Trap";
 import MonsterBuilderContext from "./MonsterBuilderContext";
@@ -8,6 +7,9 @@ import MonsterBuilderContext from "./MonsterBuilderContext";
 const MonsterBuilderContextProvider: React.FC = (props) => {
   const [monsters, setMonsters] = useState<Monster[]>([]);
   const [traps, setTraps] = useState<Trap[]>([]);
+  const [loadedMonster, setLoadedMonster] = useState<Monster | undefined>(
+    undefined
+  );
 
   useEffect(() => {
     Storage.set({
@@ -23,28 +25,31 @@ const MonsterBuilderContextProvider: React.FC = (props) => {
     });
   }, [traps]);
 
-  const addMonster = async () => {
-    const id = generateUniqueID();
-    const newMonster: Monster = new Monster(id);
+  const loadMonster = (id: string) => {
+    const loadedMonster = monsters.find((monster) => monster.id === id);
 
-    const currentMonster = monsters[parseInt(id)] || null;
-    if (currentMonster) {
-      throw new Error("Monster already exists");
+    if (!loadedMonster) {
+      throw new Error("Monster not found!");
     }
 
-    setMonsters((current) => {
-      return [...current, newMonster];
-    });
+    setLoadedMonster(loadedMonster);
   };
 
-  const addTrap = async () => {
-    const newTrap: Trap = new Trap(generateUniqueID());
-    console.log(newTrap);
-
-    setTraps((current) => {
-      return [...current, newTrap];
-    });
+  const createMonster = () => {
+    setLoadedMonster(new Monster());
   };
+
+  const getMonster = () => loadedMonster;
+
+  const saveMonster = () => {
+    if (loadedMonster) {
+      setMonsters((current) => {
+        return [...current, loadedMonster];
+      });
+    }
+  };
+
+  const clearMonster = () => setLoadedMonster(undefined);
 
   const initContext = useCallback(async () => {
     console.log("Init context");
@@ -69,8 +74,11 @@ const MonsterBuilderContextProvider: React.FC = (props) => {
       value={{
         monsters,
         traps,
-        addMonster,
-        addTrap,
+        createMonster,
+        loadMonster,
+        getMonster,
+        saveMonster,
+        clearMonster,
         initContext,
       }}
     >
