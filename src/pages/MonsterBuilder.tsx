@@ -14,7 +14,7 @@ import {
   IonTitle,
   IonToolbar,
 } from "@ionic/react";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { RouteComponentProps, useHistory } from "react-router";
 import MonsterAbilitiesTab from "../components/MonsterAbilitiesTab";
 import MonsterInfoTab from "../components/MonsterInfoTab";
@@ -30,21 +30,25 @@ interface MonsterBuilderProps
 
 const MonsterBuilder: React.FC<MonsterBuilderProps> = ({ match }) => {
   const context = useContext(MonsterBuilderContext);
-
-  console.log(
-    "Finding monster",
-    match.params.id,
-    context.monsters.find((monster) => monster.id === match.params.id)
-  );
-
-  const monster = context.monsters.find(
-    (monster) => monster.id === match.params.id
-  );
-
   const history = useHistory();
 
-  const [selectedTab, setSelectedTab] = useState<string | undefined>(Tabs.Info);
+  // If we have an ID, load the monster from the store, otherwise create a new one.
+  // UseEffect because it needs to do it after component loads.
+  useEffect(() => {
+    if (match.params.id) {
+      console.log("LOADING MONSTER", match.params.id);
+      context.clearMonster();
+      context.loadMonster(match.params.id);
+    } else if (!context.getMonster()) {
+      console.log("NEW MONSTER", context.getMonster());
+      context.createMonster();
+    }
+  }, [context, match.params.id]);
 
+  console.log("Finding monster", match.params.id, context.getMonster());
+
+  // Tab logic
+  const [selectedTab, setSelectedTab] = useState<string | undefined>(Tabs.Info);
   const selectTabHandler = (
     event: IonSegmentCustomEvent<SegmentChangeEventDetail>
   ) => {
@@ -55,7 +59,7 @@ const MonsterBuilder: React.FC<MonsterBuilderProps> = ({ match }) => {
   const displayTab = () => {
     switch (selectedTab) {
       case Tabs.Skills:
-        return <MonsterSkillsTab monster={monster}></MonsterSkillsTab>;
+        return <MonsterSkillsTab></MonsterSkillsTab>;
       case Tabs.Abilities:
         return <MonsterAbilitiesTab></MonsterAbilitiesTab>;
       case Tabs.Traits:
@@ -67,7 +71,7 @@ const MonsterBuilder: React.FC<MonsterBuilderProps> = ({ match }) => {
   };
 
   const saveMonsterHandler = () => {
-    match.params.id !== null ? context.addMonster() : context.addMonster();
+    context.saveMonster();
     history.length > 0 ? history.goBack() : history.replace("/monsters");
   };
 
