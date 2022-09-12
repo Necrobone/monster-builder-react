@@ -1,25 +1,27 @@
 import {
-  IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCol,
   IonContent,
   IonGrid,
   IonHeader,
+  IonIcon,
+  IonItem,
+  IonItemOption,
+  IonItemOptions,
+  IonItemSliding,
+  IonLabel,
+  IonList,
   IonPage,
-  IonRow,
   IonTitle,
   IonToolbar,
   isPlatform,
 } from "@ionic/react";
-import { add } from "ionicons/icons";
+import { add, skull, trash } from "ionicons/icons";
 import React, { useContext } from "react";
 import FixedBottomFab from "../components/FixedBottomFab";
 import ToolbarAction from "../components/ToolbarAction";
-import MonstersContext from "../store/MonstersContext";
+import MonsterBuilderContext from "../store/MonsterBuilderContext";
 
 const Monsters: React.FC = () => {
-  const context = useContext(MonstersContext);
+  const context = useContext(MonsterBuilderContext);
 
   return (
     <IonPage>
@@ -33,17 +35,21 @@ const Monsters: React.FC = () => {
       </IonHeader>
       <IonContent fullscreen>
         <IonGrid>
-          {context.monsters.map((monster) => (
-            <IonRow>
-              <IonCol>
-                <IonCard>
-                  <IonCardHeader>
-                    <IonCardTitle>{monster.id}</IonCardTitle>
-                  </IonCardHeader>
-                </IonCard>
-              </IonCol>
-            </IonRow>
-          ))}
+          <IonList>
+            {context.monsters.map((monster) => (
+              <IonItemSliding key={monster.id}>
+                <IonItem routerLink={`monsters/${monster.id}`}>
+                  <IonLabel>{monster.id}</IonLabel>
+                  <IonIcon icon={skull}></IonIcon>
+                </IonItem>
+                <IonItemOptions side="end">
+                  <IonItemOption onClick={() => {}}>
+                    <IonIcon icon={trash}></IonIcon>
+                  </IonItemOption>
+                </IonItemOptions>
+              </IonItemSliding>
+            ))}
+          </IonList>
         </IonGrid>
         {!isPlatform("ios") && (
           <FixedBottomFab icon={add} link="/new-monster" />
