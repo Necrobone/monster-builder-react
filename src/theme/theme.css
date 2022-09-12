@@ -4,4 +4,96 @@
     --ion-tab-bar-background: var(--ion-color-primary);
     --ion-tab-bar-color: var(--ion-color-primary-contrast);
     --ion-tab-bar-color-selected: var(--ion-color-tertiary);
+    --ion-toolbar-segment-color: var(--ion-color-tertiary);
+    --ion-toolbar-segment-color-checked: var(--ion-color-tertiary);
+    --ion-toolbar-segment-background: var(--ion-color-primary);
+    --ion-toolbar-segment-background-checked: var(--ion-color-secondary);
+    --ion-toolbar-segment-indicator-color: var(--ion-color-secondary);
 }
+
+.trait {
+    border-style: double;
+    border-width: 2px;
+    border-color: var(--ion-color-tertiary);
+    border-radius: unset;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: large;
+    width: 100%;
+    justify-content: center;
+}
+
+.trait.normal {
+    background-color: var(--ion-color-primary);
+    color: var(--ion-color-primary-contrast);
+}
+
+.trait.alignment {
+    background-color: var(--ion-color-alignment);
+    color: var(--ion-color-primary-contrast);
+}
+
+.trait.size {
+    background-color: var(--ion-color-size);
+    color: var(--ion-color-primary-contrast);
+}
+
+.trait.uncommon {
+    background-color: var(--ion-color-uncommon);
+    color: var(--ion-color-primary-contrast);
+}
+
+.trait.rare {
+    background-color: var(--ion-color-rare);
+    color: var(--ion-color-primary-contrast);
+}
+
+.trait.unique {
+    background-color: var(--ion-color-unique);
+    color: var(--ion-color-primary-contrast);
+}
+
+.trait.terrible {
+    background-color: darkred;
+    color: var(--ion-color-primary-contrast);
+}
+
+ion-select {
+    background-color: var(--ion-color-primary);
+    color: var(--ion-color-primary-contrast);
+    --placeholder-color: var(--ion-color-primary-contrast);
+    --placeholder-opacity: 1;
+    width: 100%;
+    justify-content: center;
+}
+
+ion-select::part(placeholder),
+ion-select::part(text) {
+    flex: 0 0 auto;
+}
+
+ion-select::part(icon) {
+    color: var(--ion-color-primary-contrast);
+    opacity: 1;
+}
+
+ion-button {
+    text-transform: capitalize;
+}
+
+/*:root {*/
+/*    --ion-toolbar-background: var(--ion-color-primary);*/
+/*    --ion-toolbar-color: var(--ion-color-primary-contrast);*/
+/*    --ion-tab-bar-background: var(--ion-color-primary);*/
+/*    --ion-tab-bar-color: var(--ion-color-primary-contrast);*/
+/*    --ion-tab-bar-color-selected: var(--ion-color-tertiary);*/
+/*    --ion-toolbar-segment-color: var(--ion-color-quaternary);*/
+/*    --ion-toolbar-segment-color-checked: var(--ion-color-tertiary);*/
+/*    --ion-toolbar-segment-background: var(--ion-color-primary);*/
+/*    --ion-toolbar-segment-background-checked: var(--ion-color-secondary);*/
+/*    --ion-toolbar-segment-indicator-color: var(--ion-color-secondary);*/
+/*}*/
+
+/*ion-tab-bar ion-icon {*/
+/*    color: var(--ion-color-quaternary);*/
+/*}*/
