@@ -1,11 +1,11 @@
 export enum Alignments {
-    LawfulGood = 'Lawful Good',
-    LawfulNeutral = 'Lawful Neutral',
-    LawfulEvil = 'Lawful Evil',
-    NeutralGood = 'Neutral Good',
-    Neutral = 'Neutral',
-    NeutralEvil = 'Neutral Evil',
-    ChaoticGood = 'Chaotic Good',
-    ChaoticNeutral = 'Chaotic Neutral',
-    ChaoticEvil = 'Chaotic Evil'
+  LG = "Lawful Good",
+  LN = "Lawful Neutral",
+  LE = "Lawful Evil",
+  NG = "Neutral Good",
+  N = "Neutral",
+  NE = "Neutral Evil",
+  CG = "Chaotic Good",
+  CN = "Chaotic Neutral",
+  CE = "Chaotic Evil",
 }
