@@ -1,3 +1,5 @@
+import { SelectChangeEventDetail } from "@ionic/core";
+import { IonSelectCustomEvent } from "@ionic/core/dist/types/components";
 import {
   IonCard,
   IonCardContent,
@@ -16,10 +18,12 @@ interface Options {
 interface DropdownProps {
   title: string;
   options: Options[];
+  onChange: (event: IonSelectCustomEvent<SelectChangeEventDetail>) => void;
   selected?: string | number;
 }
 
 const DropdownCard: React.FC<DropdownProps> = (props) => {
+  console.log(props);
   return (
     <IonCard className="ion-text-center">
       <IonCardHeader>
@@ -30,6 +34,7 @@ const DropdownCard: React.FC<DropdownProps> = (props) => {
           interface="popover"
           placeholder="Choose level"
           value={props.selected}
+          onIonChange={props.onChange}
         >
           {props.options.map((level) => {
             return (
