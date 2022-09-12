@@ -12,8 +12,8 @@ import { MonsterTraits } from "../enum/monster/traits/MonsterTraits";
 
 export class Monster {
   constructor(
-    public id: String,
-    public name?: String,
+    public id: string,
+    public name?: string,
     public level?: Levels,
     public alignment?: Alignments,
     public size?: Sizes,
