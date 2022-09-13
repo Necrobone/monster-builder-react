@@ -1,16 +1,15 @@
 import { IonCol, IonGrid, IonRow } from "@ionic/react";
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import { Scales } from "../enum/monster/Scales";
 import { getNamesAndValues } from "../helpers/EnumHelpers";
-import { Monster } from "../models/Monster";
+import MonsterBuilderContext from "../store/MonsterBuilderContext";
 import ChipsModal from "./ChipsModal";
 import ModalCard from "./ModalCard";
 
-interface MonsterSkillsTabProps {
-  monster: Monster | undefined;
-}
+const MonsterSkillsTab: React.FC = () => {
+  const context = useContext(MonsterBuilderContext);
+  const monster = context.getMonster();
 
-const MonsterSkillsTab: React.FC<MonsterSkillsTabProps> = (props) => {
   return (
     <Fragment>
       <IonGrid>
@@ -29,7 +28,7 @@ const MonsterSkillsTab: React.FC<MonsterSkillsTabProps> = (props) => {
         chips={getNamesAndValues(Scales)}
         title="Choose Perception"
         type="normal"
-        selected={props.monster?.perception ?? ""}
+        selected={[monster?.perception]}
       ></ChipsModal>
     </Fragment>
   );

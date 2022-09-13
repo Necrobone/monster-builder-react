@@ -16,7 +16,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 interface Chip {
   name: string;
-  value: string | number;
+  value: string;
 }
 
 interface ChipsModalProps {
@@ -24,7 +24,7 @@ interface ChipsModalProps {
   title: string;
   chips: Chip[];
   type: string;
-  selected: string | number;
+  selected: (string | undefined)[] | string | undefined;
 }
 
 const ChipsModal: React.FC<ChipsModalProps> = (props) => {
@@ -64,7 +64,7 @@ const ChipsModal: React.FC<ChipsModalProps> = (props) => {
                 <IonChip
                   key={chip.value}
                   className={`trait ${
-                    props.selected === chip.value ? props.type : ""
+                    props.selected?.includes(chip.value) ? props.type : ""
                   }`}
                 >
                   <IonLabel>{chip.name}</IonLabel>

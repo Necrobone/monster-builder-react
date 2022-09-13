@@ -107,14 +107,14 @@ const MonsterInfoTab: React.FC = () => {
         chips={getNamesAndValues(CreatureTypeTraits)}
         title="Choose Type"
         type="normal"
-        selected={CreatureTypeTraits.Aberration}
+        selected={monster?.types}
       ></ChipsModal>
       <ChipsModal
         trigger="languages"
         chips={getNamesAndValues(Languages)}
         title="Choose Languages"
         type="normal"
-        selected={Languages.Abyssal}
+        selected={monster?.languages}
       ></ChipsModal>
     </Fragment>
   );

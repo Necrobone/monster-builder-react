@@ -1,5 +1,5 @@
 import { IonCol, IonGrid, IonRow } from "@ionic/react";
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
 import { AncestryTraits } from "../enum/monster/traits/AncestryTraits";
 import { ElementalTraits } from "../enum/monster/traits/ElementalTraits";
 import { EnergyTraits } from "../enum/monster/traits/EnergyTraits";
@@ -9,10 +9,14 @@ import { PlanarTraits } from "../enum/monster/traits/PlanarTraits";
 import { SchoolTraits } from "../enum/monster/traits/SchoolTraits";
 import { TraditionTraits } from "../enum/monster/traits/TraditionTraits";
 import { getNamesAndValues } from "../helpers/EnumHelpers";
+import MonsterBuilderContext from "../store/MonsterBuilderContext";
 import ChipsModal from "./ChipsModal";
 import ModalCard from "./ModalCard";
 
 const MonsterTraitsTab: React.FC = () => {
+  const context = useContext(MonsterBuilderContext);
+  const monster = context.getMonster();
+
   return (
     <Fragment>
       <IonGrid>
@@ -86,56 +90,56 @@ const MonsterTraitsTab: React.FC = () => {
         chips={getNamesAndValues(AncestryTraits)}
         title="Choose Ancestry traits"
         type="normal"
-        selected={AncestryTraits.Aasimar}
+        selected={monster?.ancestries}
       ></ChipsModal>
       <ChipsModal
         trigger="element"
         chips={getNamesAndValues(ElementalTraits)}
         title="Choose Element traits"
         type="normal"
-        selected={ElementalTraits.Air}
+        selected={monster?.elements}
       ></ChipsModal>
       <ChipsModal
         trigger="energy"
         chips={getNamesAndValues(EnergyTraits)}
         title="Choose Energy traits"
         type="normal"
-        selected={EnergyTraits.Acid}
+        selected={monster?.energies}
       ></ChipsModal>
       <ChipsModal
         trigger="equipment"
         chips={getNamesAndValues(EquipmentTraits)}
         title="Choose Equipment traits"
         type="normal"
-        selected={EquipmentTraits.Alchemical}
+        selected={monster?.equipments}
       ></ChipsModal>
       <ChipsModal
         trigger="planar"
         chips={getNamesAndValues(PlanarTraits)}
         title="Choose Planar traits"
         type="normal"
-        selected={PlanarTraits.Erratic}
+        selected={monster?.planars}
       ></ChipsModal>
       <ChipsModal
         trigger="school"
         chips={getNamesAndValues(SchoolTraits)}
         title="Choose School traits"
         type="normal"
-        selected={SchoolTraits.Abjuration}
+        selected={monster?.schools}
       ></ChipsModal>
       <ChipsModal
         trigger="tradition"
         chips={getNamesAndValues(TraditionTraits)}
         title="Choose Tradition traits"
         type="normal"
-        selected={TraditionTraits.Arcane}
+        selected={monster?.traditions}
       ></ChipsModal>
       <ChipsModal
         trigger="monster"
         chips={getNamesAndValues(MonsterTraits)}
         title="Choose Monster traits"
         type="normal"
-        selected={MonsterTraits.Aeon}
+        selected={monster?.monsters}
       ></ChipsModal>
     </Fragment>
   );
