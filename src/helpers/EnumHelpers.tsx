@@ -1,4 +1,4 @@
-export function getNamesAndValues<T extends number>(e: any) {
+export function getNamesAndValues<T extends string>(e: any) {
   return getNames(e).map((n) => ({
     name: n,
     value: (e[n] !== undefined ? e[n] : n) as T,
